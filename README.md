@@ -12,26 +12,33 @@ This guide outlines the steps to create an Arch Linux VM on Oracle VirtualBox, c
 
 ## Arch Linux Installation
 
-1. **Start the VM and configure the disk:**
+**Start the VM after making the disk:**
+
 
 timedatectl set-ntp true
 cfdisk /dev/sda
+
 
 Create a 10MB partition with the BIOS boot type.
 Create the remaining space with the Linux filesystem type.
 Format and mount the filesystem:
 
+
 mkfs.ext4 /dev/sda2   # Adjust partition number if needed (e.g., sda2 for 30GB).
 mount /dev/sda2 /mnt
+
 
 Install the base system and utilities:
 pacstrap /mnt base linux linux-firmware grub nano git btop curl wget openssh dhcpcd sudo dnsutils base-devel htop
 
+
 Generate the fstab:
 genfstab -U /mnt >> /mnt/etc/fstab
 
+
 Chroot into the system:
 arch-chroot /mnt
+
 
 Set timezone and hardware clock:
 ln -sf /usr/share/zoneinfo/Asia/Dhaka /etc/localtime
