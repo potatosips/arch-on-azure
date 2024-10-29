@@ -1,0 +1,21 @@
+download cloudflared . example cloudflared-linux-amd64
+scp -6 cloudflared-linux-amd64 root@[2603:1040:2:5::3c]:/root (transfer mail file)
+mv cloudflared-linux-amd64 /usr/bin/cloudflared
+chmod +x /usr/bin/cloudflared
+sudo nano /etc/systemd/system/cloudflared.service
+[Unit]
+Description=Cloudflare Tunnel Service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/cloudflared --no-autoupdate --edge-ip-version 6 --protocol quic tunnel run --token eyJhIjoiYmE5ZmQzNDc2YjcwNjBhNjkxY2YzZjBmYTNjMWQzYTkiLCJ0IjoiNjI0MDM2ZWEtZGZlMC00ZDA3LWFhMWYtNDMzODJmMDdkNThiIiwicyI6Ik1UZ3dOemswWXpBdE0yTTVPUzAwTlRKaExXRmlNekV0WlRrNU1XWmtPV1ZtTXpFMyJ9
+User=root
+Group=root
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+sudo systemctl daemon-reload
+sudo systemctl enable cloudflared.service
+sudo systemctl start cloudflared.service
+sudo systemctl status cloudflared.service
