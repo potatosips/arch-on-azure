@@ -8,7 +8,7 @@ Description=Cloudflare Tunnel Service
 After=network-online.target
 
 [Service]
-ExecStart=/usr/bin/cloudflared --no-autoupdate --edge-ip-version 6 --protocol quic tunnel run --token eyJhIjoiYmE5ZmQzNDc2YjcwNjBhNjkxY2YzZjBmYTNjMWQzYTkiLCJ0IjoiNjI0MDM2ZWEtZGZlMC00ZDA3LWFhMWYtNDMzODJmMDdkNThiIiwicyI6Ik1UZ3dOemswWXpBdE0yTTVPUzAwTlRKaExXRmlNekV0WlRrNU1XWmtPV1ZtTXpFMyJ9
+ExecStart=/usr/bin/cloudflared --no-autoupdate --edge-ip-version 6 --protocol quic tunnel run --token <token from cloudflare zero trust tunnel>
 User=root
 Group=root
 Restart=on-failure
